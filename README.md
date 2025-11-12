@@ -93,7 +93,16 @@ docker build -t supportbot:latest .
 # Persist DB to a local folder (PowerShell)
 mkdir data
 # Run container (maps http://localhost:8000)
-docker run --rm -p 8000:8000 -v ${PWD}\data:/data -e CHATBOT_DB_PATH=/data/database.sqlite3 supportbot:latest
+docker run --rm -p 8000:8000 -v ${PWD}\\data:/data -e CHATBOT_DB_PATH=/data/database.sqlite3 supportbot:latest
+```
+
+Or pull a published image from GHCR (after the CI publishes at least once):
+
+```bash
+# Pull latest image
+docker pull ghcr.io/swoet/ai-driven-chatbot-python-chatterbot-:latest
+# Run it
+docker run --rm -p 8000:8000 -v ${PWD}\\data:/data -e CHATBOT_DB_PATH=/data/database.sqlite3 ghcr.io/swoet/ai-driven-chatbot-python-chatterbot-:latest
 ```
 
 Stop with Ctrl+C and the DB remains in the local data folder.
