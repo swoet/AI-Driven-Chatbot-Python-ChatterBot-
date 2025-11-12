@@ -1,0 +1,59 @@
+/* Basic light theme */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f7fafc;
+  --text: #1a202c;
+  --muted: #718096;
+  --primary: #2b6cb0;
+  --border: #e2e8f0;
+  --danger: #e53e3e;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+header h1 { margin: 0 0 8px; font-size: 24px; }
+.muted { color: var(--muted); font-size: 12px; }
+.notice { background: var(--bg-soft); border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px; font-size: 13px; }
+
+.chat { margin: 16px 0; display: grid; gap: 8px; }
+.msg { display: grid; gap: 4px; }
+.msg .role { font-size: 12px; color: var(--muted); }
+.msg.user .bubble { background: #edf2f7; justify-self: end; }
+.msg.assistant .bubble { background: #ebf8ff; }
+.bubble {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  max-width: 80ch;
+  white-space: pre-wrap;
+}
+.empty { color: var(--muted); }
+
+.composer { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin: 12px 0 20px; }
+.composer input { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; }
+.composer button { padding: 10px 14px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 600; cursor: pointer; }
+.composer button:hover { filter: brightness(0.95); }
+
+.teach { margin: 16px 0; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; background: var(--bg-soft); }
+.teach form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-top: 10px; }
+.teach input { padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; }
+.teach button { padding: 8px 12px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 600; cursor: pointer; }
+
+.toolbar { display: inline-block; margin-right: 8px; }
+.toolbar button { padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: white; cursor: pointer; }
+.toolbar .danger { border-color: var(--danger); color: var(--danger); }
+
+.flashes { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 6px; }
+.flashes li { padding: 8px 10px; border-radius: 8px; font-size: 14px; }
+.flashes .success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+.flashes .error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }

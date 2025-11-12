@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SupportBot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>💬 SupportBot</h1>
+        {% if did_bootstrap %}
+        <div class="notice">New knowledge base created at {{ db_path }} and bootstrapped with seed data.</div>
+        {% else %}
+        <div class="muted">Using database: {{ db_path }}</div>
+        {% endif %}
+      </header>
+
+      <main>
+        <div class="chat">
+          {% for m in messages %}
+            <div class="msg {{ m.role }}">
+              <div class="role">{{ 'You' if m.role == 'user' else 'Bot' }}</div>
+              <div class="bubble">{{ m.content }}</div>
+            </div>
+          {% else %}
+            <div class="empty">Start the conversation below.</div>
+          {% endfor %}
+        </div>
+
+        <form class="composer" action="{{ url_for('send') }}" method="post">
+          <input type="text" name="message" placeholder="Type your message..." autocomplete="off" required>
+          <button type="submit">Send</button>
+        </form>
+
+        <details class="teach">
+          <summary>Teach the bot a new Q/A pair</summary>
+          <form action="{{ url_for('teach') }}" method="post">
+            <input type="text" name="teach_q" placeholder="User says" required>
+            <input type="text" name="teach_a" placeholder="Bot should reply" required>
+            <button type="submit">Train</button>
+          </form>
+        </details>
+
+        <form class="toolbar" action="{{ url_for('clear') }}" method="post">
+          <button type="submit">Clear conversation</button>
+        </form>
+        <form class="toolbar" action="{{ url_for('reset_db') }}" method="post">
+          <button type="submit" class="danger">Reset training (delete DB)</button>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        {% endwith %}
+
+      </main>
+    </div>
+  </body>
+</html>
