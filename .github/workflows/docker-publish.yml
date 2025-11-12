@@ -33,11 +33,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare image name (lowercase)
+        id: meta_prep
+        shell: bash
+        run: |
+          IMAGE="${{ env.REGISTRY }}/${{ github.repository }}"
+          echo "image=${IMAGE,,}" >> "$GITHUB_OUTPUT"
+
       - name: Extract metadata (tags, labels)
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ toLower(env.IMAGE_NAME) }}
+          images: ${{ steps.meta_prep.outputs.image }}
           tags: |
             type=ref,event=branch
             type=ref,event=tag
