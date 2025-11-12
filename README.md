@@ -82,6 +82,28 @@ $env:CHATBOT_READ_ONLY = "true"
 - Clear chat and reset training (delete DB)
 - Teach-a-pair panel to add Q/A training examples on the fly
 
+## Docker
+
+Build and run the FastAPI variant:
+
+```bash
+# Build image
+docker build -t supportbot:latest .
+
+# Persist DB to a local folder (PowerShell)
+mkdir data
+# Run container (maps http://localhost:8000)
+docker run --rm -p 8000:8000 -v ${PWD}\data:/data -e CHATBOT_DB_PATH=/data/database.sqlite3 supportbot:latest
+```
+
+Stop with Ctrl+C and the DB remains in the local data folder.
+
+## GitHub Pages
+
+A static project site lives in docs/ and is deployed via GitHub Pages (see .github/workflows/pages.yml). If not already enabled:
+- In repository settings → Pages → Source: GitHub Actions
+- Push to master to trigger deployment; the workflow publishes docs/.
+
 ## Project structure
 
 - `chatbot.py` – CLI entrypoint

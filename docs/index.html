@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI-Driven Chatbot — Project Site</title>
+    <style>
+      body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;color:#1a202c;background:#ffffff}
+      .container{max-width:960px;margin:0 auto;padding:24px 16px}
+      header{display:grid;gap:8px;margin-bottom:16px}
+      header h1{margin:0}
+      .muted{color:#64748b}
+      .grid{display:grid;gap:16px}
+      .card{border:1px solid #e2e8f0;border-radius:12px;padding:16px}
+      .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+      img{max-width:100%;height:auto;border-radius:12px;border:1px solid #e2e8f0}
+      code{background:#f7fafc;border:1px solid #e2e8f0;padding:2px 6px;border-radius:6px}
+      pre{background:#0b1220;color:#e5e7eb;padding:12px;border-radius:8px;overflow:auto}
+      a.button{display:inline-block;background:#2b6cb0;color:#fff;text-decoration:none;padding:10px 14px;border-radius:8px;font-weight:600}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>💬 AI-Driven Chatbot</h1>
+        <div class="muted">Lightweight engine (SQLite + difflib), Flask UI, and FastAPI + HTMX variant</div>
+        <div>
+          <a class="button" href="https://github.com/swoet/AI-Driven-Chatbot-Python-ChatterBot-">View on GitHub</a>
+        </div>
+      </header>
+
+      <div class="grid">
+        <div class="card">
+          <img src="assets/visuals/hero-3d.svg" alt="Hero 3D" />
+        </div>
+        <div class="row">
+          <div class="card">
+            <h3>Architecture</h3>
+            <img src="assets/visuals/architecture-3d.svg" alt="Architecture 3D" />
+          </div>
+          <div class="card">
+            <h3>Quick start</h3>
+            <p>Install dependencies and run a UI:</p>
+            <pre><code>python -m venv .venv
+# PowerShell
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# Flask
+python webapp/app.py
+# FastAPI
+python -m uvicorn fastapi_app.main:app --reload</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

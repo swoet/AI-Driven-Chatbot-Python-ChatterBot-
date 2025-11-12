@@ -1,0 +1,26 @@
+# Ignore VCS and local artifacts
+.git
+.github
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Envs
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# App data
+*.sqlite3
+*.db
+*.log
+
+# Node
+node_modules/
