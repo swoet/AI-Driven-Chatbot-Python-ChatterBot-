@@ -33,12 +33,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Prepare image name (lowercase)
+      - name: Prepare image name (lowercase + sanitized)
         id: meta_prep
         shell: bash
         run: |
-          IMAGE="${{ env.REGISTRY }}/${{ github.repository }}"
-          echo "image=${IMAGE,,}" >> "$GITHUB_OUTPUT"
+          owner="${GITHUB_REPOSITORY_OWNER,,}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          name="${repo,,}"
+          shopt -s extglob
+          # Trim any trailing '-', '_' or '.' which are invalid in image names
+          name="${name%%+([._-])}"
+          IMAGE="${{ env.REGISTRY }}/${owner}/${name}"
+          echo "image=${IMAGE}" >> "$GITHUB_OUTPUT"
 
       - name: Extract metadata (tags, labels)
         id: meta
