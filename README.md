@@ -1,9 +1,27 @@
-# AI-Driven Chatbot (Python + ChatterBot)
+<p align="center">
+  <img src="assets/visuals/hero-3d.svg" alt="AI-Driven Chatbot 3D Hero" />
+</p>
 
-This project provides a minimal ChatterBot-based assistant with:
-- Persistent SQLite storage (no data loss across runs)
+<p align="center">
+  <a href="https://github.com/swoet/AI-Driven-Chatbot-Python-ChatterBot-/actions"><img alt="tests" src="https://img.shields.io/github/actions/workflow/status/swoet/AI-Driven-Chatbot-Python-ChatterBot-/tests.yml?label=tests&logo=github"></a>
+  <img alt="python" src="https://img.shields.io/badge/python-3.12+-3776AB?logo=python&logoColor=white">
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-informational">
+</p>
+
+# AI-Driven Chatbot (Python)
+
+A lightweight, persistent chatbot with:
+- SQLite storage (no data loss across runs)
 - A simple CLI
-- A clean Flask web UI with chat history, reset, and on-the-fly teaching
+- Two web UIs: Flask and FastAPI + HTMX
+
+---
+
+## Architecture (3D)
+
+![Architecture 3D](assets/visuals/architecture-3d.svg)
+
+---
 
 ## Quick start
 
@@ -11,10 +29,10 @@ This project provides a minimal ChatterBot-based assistant with:
 
 ```bash
 python -m venv .venv
-# Windows PowerShell
-.\.venv\Scripts\Activate.ps1
+# PowerShell
+.\\.venv\\Scripts\\Activate.ps1
 # or CMD
-.\.venv\Scripts\activate.bat
+.\\.venv\\Scripts\\activate.bat
 ```
 
 2) Install dependencies
@@ -33,21 +51,19 @@ python chatbot.py
 
 ```bash
 python webapp/app.py
-# then open http://127.0.0.1:8000
+# open http://127.0.0.1:8000
 ```
 
 5) Run the FastAPI + HTMX UI
 
 ```bash
 python -m uvicorn fastapi_app.main:app --reload
-# then open http://127.0.0.1:8000
+# open http://127.0.0.1:8000
 ```
 
-The first run will create a local SQLite database (default: `database.sqlite3`). The CLI and UI will then share the same knowledge base.
+The first run creates `database.sqlite3`. CLI and both UIs share the same knowledge base.
 
 ## Configuration
-
-You can set these environment variables:
 
 - `CHATBOT_DB_PATH` – Path to the SQLite database file (default: `./database.sqlite3`).
 - `CHATBOT_READ_ONLY` – If `true`, disables training (default: `false`).
@@ -59,30 +75,28 @@ $env:CHATBOT_DB_PATH = "C:\\path\\to\\mydb.sqlite3"
 $env:CHATBOT_READ_ONLY = "true"
 ```
 
-## Notes on ChatterBot versions
-
-ChatterBot’s older releases have compatibility constraints with SQLAlchemy. This project pins `SQLAlchemy<1.4` for safety. If you already have a working combination, you can adjust `requirements.txt` accordingly.
-
 ## UI/UX
 
-- Flask chat interface with clean layout and styles
-- Conversation history (per browser session)
-- Controls to clear chat and reset training (deletes DB)
-- Simple “Teach the bot” panel for quick Q/A fine-tuning
+- Clean web UIs (Flask or FastAPI + HTMX)
+- Per-session conversation history (Flask) and HTMX incremental updates (FastAPI)
+- Clear chat and reset training (delete DB)
+- Teach-a-pair panel to add Q/A training examples on the fly
 
 ## Project structure
 
 - `chatbot.py` – CLI entrypoint
-- `bot_core.py` – Bot configuration and bootstrap training (SQLite + difflib)
+- `bot_core.py` – Bot engine (SQLite + difflib) and bootstrap training
 - `webapp/app.py` – Flask web UI
 - `webapp/templates/` and `webapp/static/` – UI templates and styles
 - `fastapi_app/main.py` – FastAPI + HTMX web UI
 - `fastapi_app/templates/` and `fastapi_app/static/` – UI templates and styles
+- `tests/` – Unit tests
+- `.github/workflows/tests.yml` – CI for tests
 
-## Roadmap ideas
+## Roadmap
 
-- Add corpus-based training flows
+- Corpus-based training flows
 - Export/import knowledge base snapshots
-- Unit tests, linting (ruff), and pre-commit hooks
-- Optional FastAPI + HTMX web UI for production deployment
-- Optional Streamlit UI (add back `streamlit` to requirements if your Python supports prebuilt `pyarrow` wheels)
+- Linting (ruff), type checking, and pre-commit hooks
+- Docker for the FastAPI variant
+- Optional Streamlit UI (re-add `streamlit` when platform provides prebuilt `pyarrow`)
