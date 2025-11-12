@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 from typing import List, Dict, Any
 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+
+# Ensure project root on sys.path for local runs (python webapp/app.py)
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from bot_core import get_or_create_bot
 
