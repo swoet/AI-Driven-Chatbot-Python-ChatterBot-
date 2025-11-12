@@ -29,10 +29,17 @@ pip install -r requirements.txt
 python chatbot.py
 ```
 
-4) Run the web UI
+4) Run the Flask web UI
 
 ```bash
 python webapp/app.py
+# then open http://127.0.0.1:8000
+```
+
+5) Run the FastAPI + HTMX UI
+
+```bash
+python -m uvicorn fastapi_app.main:app --reload
 # then open http://127.0.0.1:8000
 ```
 
@@ -69,6 +76,8 @@ ChatterBot’s older releases have compatibility constraints with SQLAlchemy. Th
 - `bot_core.py` – Bot configuration and bootstrap training (SQLite + difflib)
 - `webapp/app.py` – Flask web UI
 - `webapp/templates/` and `webapp/static/` – UI templates and styles
+- `fastapi_app/main.py` – FastAPI + HTMX web UI
+- `fastapi_app/templates/` and `fastapi_app/static/` – UI templates and styles
 
 ## Roadmap ideas
 

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SupportBot (FastAPI)</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>💬 SupportBot (FastAPI)</h1>
+        {% if did_bootstrap %}
+        <div class="notice">New knowledge base created at {{ db_path }} and bootstrapped with seed data.</div>
+        {% else %}
+        <div class="muted">Using database: {{ db_path }}</div>
+        {% endif %}
+      </header>
+
+      <main>
+        <div id="chat" class="chat"></div>
+
+        <form class="composer" hx-post="/send" hx-target="#chat" hx-swap="beforeend" onsubmit="this.reset()">
+          <input type="text" name="message" placeholder="Type your message..." autocomplete="off" required>
+          <button type="submit">Send</button>
+        </form>
+
+        <details class="teach">
+          <summary>Teach the bot a new Q/A pair</summary>
+          <form hx-post="/teach" hx-target="#flash" hx-swap="innerHTML">
+            <input type="text" name="teach_q" placeholder="User says" required>
+            <input type="text" name="teach_a" placeholder="Bot should reply" required>
+            <button type="submit">Train</button>
+          </form>
+        </details>
+
+        <form class="toolbar" hx-post="/clear" hx-target="#chat" hx-swap="innerHTML">
+          <button type="submit">Clear conversation</button>
+        </form>
+        <form class="toolbar" hx-post="/reset-db" hx-target="#flash" hx-swap="innerHTML">
+          <button type="submit" class="danger">Reset training (delete DB)</button>
+        </form>
+
+        <ul id="flash" class="flashes"></ul>
+      </main>
+    </div>
+  </body>
+</html>
